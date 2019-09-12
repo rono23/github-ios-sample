@@ -1,0 +1,8 @@
+# https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md
+
+--indent 2
+--header strip
+--ranges no-space
+--commas inline
+--commas always
+--wrapcollections before-first

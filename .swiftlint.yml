@@ -1,0 +1,13 @@
+# https://github.com/realm/SwiftLint#configuration
+
+line_length: 150
+
+disabled_rules:
+  - identifier_name
+  - trailing_comma
+  - force_cast
+  - nesting
+
+excluded:
+  - Carthage
+  - Pods

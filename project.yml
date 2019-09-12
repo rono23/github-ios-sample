@@ -1,0 +1,18 @@
+# https://github.com/yonaskolb/XcodeGen/blob/master/Docs/ProjectSpec.md
+
+name: GitHub
+options:
+  bundleIdPrefix: com.rono23.GitHub
+  indentWidth: 2
+  tabWidth: 2
+targets:
+  GitHub:
+    type: application
+    platform: iOS
+    deploymentTarget: "12.4"
+    sources: [GitHub]
+    postCompileScripts:
+      - name: SwiftFormat
+        script: swiftformat .
+      - name: SwiftLint
+        script: swiftlint
