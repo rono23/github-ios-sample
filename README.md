@@ -2,6 +2,8 @@
 
 ```
 brew install xcodegen swiftformat swiftlint
+git clone git@github.com:rono23/github-ios-sample.git
+cd github-ios-sample
 xcodegen generate
 open GitHub.xcodeproj
 ```
