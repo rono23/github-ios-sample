@@ -2,7 +2,7 @@
 
 name: GitHub
 options:
-  bundleIdPrefix: com.rono23.GitHub
+  bundleIdPrefix: com.rono23
   indentWidth: 2
   tabWidth: 2
 targets:
