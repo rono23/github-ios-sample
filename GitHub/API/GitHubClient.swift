@@ -1,10 +1,9 @@
 import Foundation
 
 class GitHubClient {
-  private let session: URLSession = {
+  private lazy var session: URLSession = {
     let configuration = URLSessionConfiguration.default
-    let session = URLSession(configuration: configuration)
-    return session
+    return URLSession(configuration: configuration)
   }()
 
   func send<Request: GitHubRequest>(request: Request, completion: @escaping (Result<Request.Response, GitHubClientError>) -> Void) {

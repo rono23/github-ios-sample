@@ -2,12 +2,12 @@ import Foundation
 
 class GitHubAPI {
   enum Sort: String {
-    case stars, created, updated
-    static let allValues = [stars, created, updated]
+    case created, updated
+    static let allValues = [created, updated]
   }
 
   struct SearchRepositories: GitHubRequest {
-    typealias Response = SearchResponse<Repository>
+    typealias Response = [Repository]
     let keyword: String
     let sort: Sort
 
@@ -16,31 +16,16 @@ class GitHubAPI {
     }
 
     var path: String {
-      return "/search/repositories"
+      return "/user/repos"
     }
 
     var queryItems: [URLQueryItem] {
       return [
         URLQueryItem(name: "q", value: keyword),
         URLQueryItem(name: "sort", value: sort.rawValue),
+        URLQueryItem(name: "direction", value: "desc"),
+        URLQueryItem(name: "per_page", value: "1000"),
       ]
-    }
-  }
-
-  struct SearchUsers: GitHubRequest {
-    typealias Response = SearchResponse<User>
-    let keyword: String
-
-    var method: HTTPMethod {
-      return .get
-    }
-
-    var path: String {
-      return "/search/users"
-    }
-
-    var queryItems: [URLQueryItem] {
-      return [URLQueryItem(name: "q", value: keyword)]
     }
   }
 }

@@ -1,15 +1,26 @@
+## WIP
+
+- [x] Authentication
+- [x] Fetch own repositories
+- [ ] Search own repositories by keyword
+
 ## Setup
 
 ```
-brew install xcodegen swiftformat swiftlint
+brew install carthage xcodegen swiftformat swiftlint
 git clone git@github.com:rono23/github-ios-sample.git
 cd github-ios-sample
+git checkout oauth
+carthage update --platform iOS
+
+# https://github.com/settings/applications/xxx
+## Set your Client ID, Client Secret and so on
+cp Configs/Secrets.swift.example GitHub/Configs/Secrets.swift
+vim GitHub/Configs/Secrets.swift
+
+## Replace `rono23-github` with your `Secrets.OAuth.scheme`
+vim GitHub/Info.plist
+
 xcodegen generate
 open GitHub.xcodeproj
 ```
-
-## Screenshots
-
-| Repositry | History |
-| --- | --- |
-| ![Repositry image](https://user-images.githubusercontent.com/26753/64762072-6e9bb200-d578-11e9-970a-0fefeb731ab5.PNG) | ![History image](https://user-images.githubusercontent.com/26753/64762073-6f344880-d578-11e9-9727-ba882f32f09d.PNG) |

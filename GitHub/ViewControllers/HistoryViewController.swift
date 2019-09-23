@@ -24,7 +24,8 @@ class HistoryViewController: UIViewController {
     navigationItem.searchController = searchController
     definesPresentationContext = true
 
-    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clearHistories(sender:)))
+    navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Clear", style: .plain, target: self, action: #selector(clearHistories(sender:)))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log out", style: .plain, target: self, action: #selector(logout(sender:)))
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +39,10 @@ class HistoryViewController: UIViewController {
     allHistories = []
     filteredHistories = []
     tableView.reloadData()
+  }
+
+  @objc func logout(sender _: UIBarButtonItem) {
+    AppDelegate.shared.rootViewController.showLoginScreenAfterLogout()
   }
 
   private func isSearchBarEmpty() -> Bool {

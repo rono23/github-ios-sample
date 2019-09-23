@@ -1,3 +1,4 @@
+import OAuthSwift
 import UIKit
 
 @UIApplicationMain
@@ -9,6 +10,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window = window ?? UIWindow()
     window!.rootViewController = RootViewController()
     window!.makeKeyAndVisible()
+    return true
+  }
+
+  func application(_: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+    if options[.sourceApplication] as? String == "com.apple.SafariViewService", url.host == Secrets.OAuth.host {
+      OAuthSwift.handle(url: url)
+    }
+
     return true
   }
 

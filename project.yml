@@ -9,10 +9,15 @@ targets:
   GitHub:
     type: application
     platform: iOS
-    deploymentTarget: "12.4"
+    deploymentTarget: 13.0
     sources: [GitHub]
     postCompileScripts:
       - name: SwiftFormat
         script: swiftformat .
       - name: SwiftLint
         script: swiftlint
+    dependencies:
+      - carthage: OAuthSwift
+      - carthage: KeychainAccess
+    settings:
+      TARGETED_DEVICE_FAMILY: 1

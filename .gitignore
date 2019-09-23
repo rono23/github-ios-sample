@@ -1,2 +1,4 @@
 .DS_Store
 *.xcodeproj
+Carthage/
+GitHub/Configs/Secrets.swift

@@ -1,0 +1,2 @@
+github "OAuthSwift/OAuthSwift" ~> 2.0.0
+github "kishikawakatsumi/KeychainAccess"

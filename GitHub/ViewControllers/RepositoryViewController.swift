@@ -7,7 +7,7 @@ class RepositoryViewController: UIViewController {
   private var refreshControl: UIRefreshControl!
   private var activityIndicatorView: UIActivityIndicatorView!
   private var repositories = [Repository]()
-  private var sortParam: GitHubAPI.Sort = .stars
+  private var sortParam: GitHubAPI.Sort = .created
   private let historyDataSource = HistoryDataSource()
   private let client: GitHubClient = GitHubClient()
 
@@ -30,7 +30,7 @@ class RepositoryViewController: UIViewController {
     searchBar.delegate = self
     tableView.tableHeaderView = searchBar
 
-    activityIndicatorView = UIActivityIndicatorView(style: .gray)
+    activityIndicatorView = UIActivityIndicatorView(style: .medium)
     navigationItem.leftBarButtonItem = UIBarButtonItem(customView: activityIndicatorView)
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sort", style: .plain, target: self, action: #selector(sortRepositories(sender:)))
   }
@@ -86,8 +86,8 @@ class RepositoryViewController: UIViewController {
       case let .success(response):
         self?.repositories.removeAll()
 
-        for item in response.items {
-          self?.repositories.append(item)
+        for repo in response {
+          self?.repositories.append(repo)
         }
 
         self?.tableView.reloadData()

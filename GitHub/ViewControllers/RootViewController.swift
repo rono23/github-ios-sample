@@ -1,17 +1,50 @@
 import UIKit
 
-class RootViewController: UITabBarController {
+class RootViewController: UIViewController {
+  private var current: UIViewController
+
+  init() {
+    current = SplashViewController()
+    super.init(nibName: nil, bundle: nil)
+  }
+
+  required init?(coder _: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    let repositoryVC = RepositoryViewController()
-    repositoryVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
-    let repositoryNavVC = UINavigationController(rootViewController: repositoryVC)
+    addChild(current)
+    current.view.frame = view.bounds
+    view.addSubview(current.view)
+    current.didMove(toParent: self)
+  }
 
-    let historyVC = HistoryViewController()
-    historyVC.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 1)
-    let historyNavVC = UINavigationController(rootViewController: historyVC)
+  func showLoginScreen() {
+    let new = UINavigationController(rootViewController: LoginViewController())
+    switchScreen(to: new)
+  }
 
-    setViewControllers([repositoryNavVC, historyNavVC], animated: false)
+  func showMainScreen() {
+    let new = MainViewController()
+    switchScreen(to: new)
+  }
+
+  func showLoginScreenAfterLogout() {
+    KeychainOAuth().clear()
+    showLoginScreen()
+  }
+
+  private func switchScreen(to new: UIViewController) {
+    addChild(new)
+    new.view.frame = view.bounds
+    view.addSubview(new.view)
+    new.didMove(toParent: self)
+
+    current.willMove(toParent: nil)
+    current.view.removeFromSuperview()
+    current.removeFromParent()
+    current = new
   }
 }
